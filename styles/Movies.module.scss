@@ -1,0 +1,15 @@
+.movie {
+    
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+
+    &__item {
+        list-style: none;
+        flex: 1 1 50%;
+        text-align: center;
+        padding: 12px 24px;
+    }
+}
