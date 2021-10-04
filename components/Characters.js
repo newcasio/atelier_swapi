@@ -4,8 +4,8 @@ const Characters = ({ characters }) => {
     return (
          <ul>
             {characters.map((person) => (
-                <li>
-                    <Link href="/characters/[id]" as={`/character/${person.replace("https://swapi.dev/api/people/","").replace("/","")}`} >
+                <li key={person}>
+                    <Link  href="/characters/[id]" as={`/character/${person.replace("https://swapi.dev/api/people/","").replace("/","")}`} >
                         <a>{person}</a>
                     </Link>
                 </li>
