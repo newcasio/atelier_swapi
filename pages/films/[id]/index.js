@@ -1,31 +1,39 @@
-// import Characters from '../../../components/Characters'
+import Characters from '../../../components/Characters'
 
 const movie = ({film}) => {
 
     return (
         <div>
-            <div>Movie page for <strong>{film.title}</strong></div>
-            <div>Episode {film.episode_id}</div>
-            {/* <Characters characters={film.characters} /> */}
+            <h1>{film.title}</h1>
+
+            <h2>Characters</h2>
+            <Characters charList={ film.characters}/>
         </div>
     )
 }
 
-export async function getStaticPaths() {
+
+// this getStaticPaths is just getting the different films, so this dynamic routes/pages can be prebuilt for each film
+export const getStaticPaths = async() => {
 
     const res = await fetch (`https://swapi.dev/api/films`)
     const movies = await res.json();
 
-    const paths = movies.results.map((movie) => ({
-        params: {id: movie.url.replace("https://swapi.dev/api/films/","").replace("/","")}
+    const paths = movies.results.map((movie, index) => ({
+        params: {id: (index+1).toString()}
     }))
 
     return {paths, fallback: false}
 }
 
-export const getStaticProps = async ({params}) => {
-    const res = await fetch (`https://swapi.dev/api/films/${params.id}`)
 
+// this get static props to get individual film details
+export const getStaticProps = async (context) => {
+
+    // console.log('context',context)
+    const id = context.params.id;
+
+    const res = await fetch (`https://swapi.dev/api/films/${id}`)
     const film = await res.json()
     
     return {

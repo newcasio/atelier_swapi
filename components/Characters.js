@@ -1,17 +1,21 @@
-import Link from 'next/link';
+import Character from "./Character";
 
-const Characters = ({ characters }) => {
+const Characters = ({ charList }) => {
+    console.log('charlist', charList)
     return (
-         <ul>
-            {characters.map((person) => (
-                <li key={person}>
-                    <Link  href="/characters/[id]" as={`/character/${person.replace("https://swapi.dev/api/people/","").replace("/","")}`} >
-                        <a>{person}</a>
-                    </Link>
-                </li>
-            ))}
-        </ul>
-            )
+        <>
+            <div>Characters</div>
+            <ul>
+                {charList.map((character, index) => {
+                    return (
+                        <li>
+                            <Character details={character} />
+                        </li>
+                    )
+                })}        
+            </ul>
+        </>            
+    )
 }
 
 export default Characters;

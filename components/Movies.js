@@ -5,18 +5,15 @@ import style from '../styles/Movies.module.scss';
 class Movies extends React.Component{
     render() {
         const { results } = this.props.movies.films;
-        console.log(results);
+        // console.log(results);
         
         return (
             <ul className={style.movie__list}>
-                {results.map((film) => (
+                {results.map((film, index) => (
                     <li className={ style.movie__item } key={film.episode_id}>
-                        <Link href={{
-                            pathname: `/films/[id]`,
-                            query: {
-                                id: film.episode_id
-                            }
-                        }} as={`/films/${encodeURIComponent(film.url.replace("https://swapi.dev/api/films/", "").replace("/",""))}`} >
+                        <Link
+                            href={`/films/${index+1}`}
+                        >
                             <a>{film.title}</a>
                         </Link>
                     </li>
